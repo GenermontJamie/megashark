@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Rooms Controller
@@ -37,11 +38,56 @@ class RoomsController extends AppController
     {
         $room = $this->Rooms->get($id);
         
+        $monday=new Time("monday this week");
+        $sunday=new Time("monday next week");
+        $showtime = $this->Rooms->Showtimes->find()->where(['Showtimes.room_id' => $id])->where(['Showtimes.start >=' => $monday ])->where(['Showtimes.start <=' => $sunday ])->contain(['Movies', 'Rooms']);
+        $lundi=[];
+        $mardi=[];
+        $mercredi=[];
+        $jeudi=[];
+        $vendredi=[];
+        $samedi=[];
+        $dimanche=[];
+        foreach($showtime as $value){
+                    if($value->start->format("N")==1){
+                        $lundi[]=$value;
+                        }
+                    if($value->start->format("N")==2){
+                        $mardi[]=$value;
+                        }
+                    if($value->start->format("N")==3){
+                        $mercredi[]=$value;
+                        }
+                    if($value->start->format("N")==4){
+                        $jeudi[]=$value;
+                        }
+                    if($value->start->format("N")==5){
+                        $vendredi[]=$value;
+                        }
+                    if($value->start->format("N")==6){
+                        $samedi[]=$value;
+                        }
+                    if($value->start->format("N")==7){
+                        $dimanche[]=$value;
+                        }
+                    
+            }
+            $showtimesWeek=[];
+            foreach($showtime as $showtimes){
+             $showtimesWeek[$showtimes->start->format('N')]=$showtimes;     
+            }
         
-        $showtime = $this->Rooms->Showtimes->find()->where(['Showtimes.room_id' => $id])->contain(['Movies', 'Rooms']);
         
         $this->set('room', $room);
         $this->set('showtime', $showtime);
+        $this->set('showtimesWeek', $showtimesWeek);
+        $this->set('lundi',$lundi);
+        $this->set('mardi',$mardi);
+        $this->set('mercredi',$mercredi);
+        $this->set('jeudi',$jeudi);
+        $this->set('vendredi',$vendredi);
+        $this->set('samedi',$samedi);
+        $this->set('dimanche',$dimanche);
         $this->set('_serialize', ['room']);
        
     }

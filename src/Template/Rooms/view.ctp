@@ -39,14 +39,115 @@
             <td><?= h($room->modified) ?></td>
         </tr>
     </table>
-
-    <?php 
-        foreach($showtime as $value){
-                echo('Nom: '.$value->movie->name.'<br>');
-                echo('Date de début: '.$value->start->format('H:i').'<br>');
-                echo('Date de fin: '.$value->start->format('H:i').'<br>');
-                echo('<br>');
+    
+    <table>
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+            
+        </tr>
+        <tr>
+            <td>
+            <?php
+            
+            foreach($lundi as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
             }
-    ?>
+                ?>
+            </td>
+            <td><?php
+            
+            foreach($mardi as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
+            }
+                ?></td>
+            <td><?php
+            
+            foreach($mercredi as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
+            }
+                ?></td>
+            <td><?php
+            
+            foreach($jeudi as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
+            }
+                ?></td>
+            <td><?php
+            
+            foreach($vendredi as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
+            }
+                ?></td>
+            <td><?php
+            
+            foreach($samedi as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
+            }
+                ?></td>
+            <td>
+            <?php
+            
+            foreach($dimanche as $value){
+                echo('Name: '.$value->movie->name.'<br>');
+                echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                echo('Duration: '.$value->movie->duration.'h'.'<br><br>');
+            }
+                ?>
+                </td>
+        </tr>            
+    </table>
+    <br>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+            
+        </tr>
+        <tr>
+            <?php
+            
+            for ($i = 1; $i <= 7; $i++) {
+              echo'<td>';
+              foreach($showtime as $value){
+                  if($value->start->format('N')==$i){
+                    echo('Name: '.$value->movie->name.'<br>');
+                    echo('Start Hour: '.$value->start->format('H:i').'<br>');
+                    echo('Duration: '.$value->movie->duration.'h'.'<br><br>'); 
+                      
+                    }
+                  }
+              
+              echo'</td>';
+            }
+            ?>
+            
+        </tr>
+    </table>
+   
     
 </div>
